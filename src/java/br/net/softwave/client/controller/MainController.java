@@ -17,6 +17,7 @@ import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
@@ -24,8 +25,10 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.ToolBar;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
@@ -181,11 +184,13 @@ public class MainController implements Initializable {
             redimensionaCentro = new ResizeWidthTransition(duracao, tabMain, menu.getWidth() + tabMain.getWidth());
             parallelTransition = new ParallelTransition(deslizaMenu, redimensionaCentro);
             parallelTransition.play();
+            ((VBox) tabMain.getSelectionModel().getSelectedItem().getContent()).setAlignment(Pos.CENTER);
         } else {
-            deslizaMenu.setToX(0);
+            deslizaMenu.setToX(0); 
             redimensionaCentro = new ResizeWidthTransition(duracao, tabMain, tabMain.getWidth() - menu.getWidth());
             parallelTransition = new ParallelTransition(redimensionaCentro, deslizaMenu);
             parallelTransition.play();
+            ((VBox) tabMain.getSelectionModel().getSelectedItem().getContent()).setAlignment(Pos.CENTER);
         }
     }
 
@@ -217,12 +222,16 @@ public class MainController implements Initializable {
 
     private void showChat(Tab tab) {
         try {
+            ((VBox) tab.getContent()).setStyle("-fx-background-color: black;");
+            ((VBox) tab.getContent()).prefWidthProperty().bind(tabMain.widthProperty());
+            ((VBox) tab.getContent()).prefHeightProperty().bind(tabMain.heightProperty());
+            
             Pane root = FXMLLoader.load(Client.class.getResource(Client.ENDERECO_FXML_MAIN_CHAT));
 
-            root.prefWidthProperty().bind(tabMain.widthProperty());
-            root.prefHeightProperty().bind(tabMain.heightProperty());
-
-            tab.setContent(root);
+            /*root.prefWidthProperty().bind(tabMain.widthProperty());
+            root.prefHeightProperty().bind(tabMain.heightProperty());*/
+            
+            ((Pane) tab.getContent()).getChildren().add(root);
         } catch (IOException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }

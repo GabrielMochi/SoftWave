@@ -55,52 +55,44 @@ public class LoginController implements Initializable {
             if (campoProntuario.getText().length() == 7) {
                 Client cliente;
                 WebResource webResource;
-                ClientResponse resposta = null;
+                ClientResponse resposta;
                 Credenciais credenciais = new Credenciais(campoProntuario.getText(), campoSenha.getText());
-                System.out.println(credenciais);
 
-                try {
-                    cliente = Client.create();
-                    webResource = cliente.resource(br.net.softwave.client.Client.ENDERECO_LOGIN);
-                    resposta = webResource
-                            .type(MediaType.APPLICATION_JSON)
-                            .accept(MediaType.APPLICATION_JSON)
-                            .post(ClientResponse.class, credenciais);
+                cliente = Client.create();
+                webResource = cliente.resource(br.net.softwave.client.Client.ENDERECO_LOGIN);
+                resposta = webResource
+                        .type(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON_TYPE)
+                        .post(ClientResponse.class, credenciais);
 
-                    if (resposta.getStatus() == ClientResponse.Status.OK.getStatusCode()) {
-                        new FadeOutTransition(vBox)
-                                .setDuration(Duration.seconds(1))
-                                .setOnFinish((event) -> {
-                                    try {
-                                        Screen.mainScene((Stage) vBox.getScene().getWindow());
-                                    } catch (IOException ex) {
-                                        Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-                                    }
-                                })
-                                .play();
-                    } else if (resposta.getStatus() == ClientResponse.Status.NO_CONTENT.getStatusCode()) {
-                        new ShakeTransition(vBox)
-                                .setDuration(Duration.millis(500))
-                                .setOnFinish((event) -> {
-                                    rotuloErro.setText("Usuário ou senha incorretos");
-                                })
-                                .play();
-                    } else {
-                        new ShakeTransition(vBox)
-                                .setDuration(Duration.millis(500))
-                                .setOnFinish((event) -> {
-                                    rotuloErro.setText("Ops! Estou tendo problemas internos");
-                                })
-                                .play();
-                    }
-                } catch (ClientHandlerException | UniformInterfaceException erro) {
-                    System.out.println(String.format("[%s]: %s \nCausa: %s", "requesição de login", erro.getMessage(), erro.getCause()));
-                    erro.printStackTrace();
-                } finally {
-                    if (resposta != null) {
-                        resposta.close();
-                    }
+                if (resposta.getStatus() == ClientResponse.Status.OK.getStatusCode()) {
+                    new FadeOutTransition(vBox)
+                            .setDuration(Duration.seconds(1))
+                            .setOnFinish((event) -> {
+                                try {
+                                    Screen.mainScene((Stage) vBox.getScene().getWindow());
+                                } catch (IOException ex) {
+                                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            })
+                            .play();
+                } else if (resposta.getStatus() == ClientResponse.Status.NO_CONTENT.getStatusCode()) {
+                    new ShakeTransition(vBox)
+                            .setDuration(Duration.millis(500))
+                            .setOnFinish((event) -> {
+                                rotuloErro.setText("Usuário ou senha incorretos");
+                            })
+                            .play();
+                } else {
+                    new ShakeTransition(vBox)
+                            .setDuration(Duration.millis(500))
+                            .setOnFinish((event) -> {
+                                rotuloErro.setText("Ops! Estou tendo problemas internos");
+                            })
+                            .play();
                 }
+
+                resposta.close();
             } else {
                 new ShakeTransition(vBox)
                         .setDuration(Duration.millis(500))

@@ -18,6 +18,7 @@ public class Client extends Application {
     public static final String ENDERECO_SERVICE = ENDERECO_SERVIDOR + "service/";
     public static final String ENDERECO_USUARIO = ENDERECO_SERVICE + "usuario/";
     public static final String ENDERECO_LOGIN = ENDERECO_SERVICE + "login/";
+    public static final String ENDERECO_AREACONHECIMENTO = ENDERECO_SERVICE + "areaConhecimento/";
     
     public static final String ENDERECO_FXML_LOGIN = "view/login/Login.fxml";
     public static final String ENDERECO_FXML_MAIN = "view/main/Main.fxml";

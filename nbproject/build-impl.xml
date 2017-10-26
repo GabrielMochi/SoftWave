@@ -814,8 +814,9 @@ exists or setup the property manually. For example like this:
         <basename file="${file.reference.jackson-jaxrs-1.9.13.jar}" property="manifest.file.reference.jackson-jaxrs-1.9.13.jar"/>
         <basename file="${file.reference.jackson-mapper-asl-1.9.13.jar}" property="manifest.file.reference.jackson-mapper-asl-1.9.13.jar"/>
         <basename file="${file.reference.jackson-xc-1.9.13.jar}" property="manifest.file.reference.jackson-xc-1.9.13.jar"/>
+        <basename file="${file.reference.gson-2.8.2.jar}" property="manifest.file.reference.gson-2.8.2.jar"/>
         <manifest file="${build.ear.classes.dir}/META-INF/MANIFEST.MF" mode="update">
-            <attribute name="Extension-List" value="jar-1 jar-2 jar-3 jar-4 jar-5 jar-6 jar-7 jar-8 jar-9 "/>
+            <attribute name="Extension-List" value="jar-1 jar-2 jar-3 jar-4 jar-5 jar-6 jar-7 jar-8 jar-9 jar-10 "/>
             <attribute name="jar-1-Extension-Name" value="${manifest.file.reference.jersey-bundle-1.19.4.jar}"/>
             <attribute name="jar-2-Extension-Name" value="${manifest.file.reference.AwesomeUI.jar}"/>
             <attribute name="jar-3-Extension-Name" value="${manifest.file.reference.jfoenix.jar}"/>
@@ -825,6 +826,7 @@ exists or setup the property manually. For example like this:
             <attribute name="jar-7-Extension-Name" value="${manifest.file.reference.jackson-jaxrs-1.9.13.jar}"/>
             <attribute name="jar-8-Extension-Name" value="${manifest.file.reference.jackson-mapper-asl-1.9.13.jar}"/>
             <attribute name="jar-9-Extension-Name" value="${manifest.file.reference.jackson-xc-1.9.13.jar}"/>
+            <attribute name="jar-10-Extension-Name" value="${manifest.file.reference.gson-2.8.2.jar}"/>
         </manifest>
     </target>
     <target depends="compile" if="dist.ear.dir" name="library-inclusion-in-manifest">
@@ -837,8 +839,9 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${file.reference.jackson-jaxrs-1.9.13.jar}" manifestproperty="manifest.file.reference.jackson-jaxrs-1.9.13.jar" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.jackson-mapper-asl-1.9.13.jar}" manifestproperty="manifest.file.reference.jackson-mapper-asl-1.9.13.jar" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.jackson-xc-1.9.13.jar}" manifestproperty="manifest.file.reference.jackson-xc-1.9.13.jar" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.gson-2.8.2.jar}" manifestproperty="manifest.file.reference.gson-2.8.2.jar" todir="${dist.ear.dir}/lib"/>
         <manifest file="${build.ear.classes.dir}/META-INF/MANIFEST.MF" mode="update">
-            <attribute name="Class-Path" value="${manifest.file.reference.jersey-bundle-1.19.4.jar} lib/${manifest.file.reference.jersey-bundle-1.19.4.jar} ${manifest.file.reference.AwesomeUI.jar} lib/${manifest.file.reference.AwesomeUI.jar} ${manifest.file.reference.jfoenix.jar} lib/${manifest.file.reference.jfoenix.jar} ${manifest.file.reference.jersey-json-1.19.4.jar} lib/${manifest.file.reference.jersey-json-1.19.4.jar} ${manifest.file.reference.jersey-client-1.19.4.jar} lib/${manifest.file.reference.jersey-client-1.19.4.jar} ${manifest.file.reference.jackson-core-asl-1.9.13.jar} lib/${manifest.file.reference.jackson-core-asl-1.9.13.jar} ${manifest.file.reference.jackson-jaxrs-1.9.13.jar} lib/${manifest.file.reference.jackson-jaxrs-1.9.13.jar} ${manifest.file.reference.jackson-mapper-asl-1.9.13.jar} lib/${manifest.file.reference.jackson-mapper-asl-1.9.13.jar} ${manifest.file.reference.jackson-xc-1.9.13.jar} lib/${manifest.file.reference.jackson-xc-1.9.13.jar} "/>
+            <attribute name="Class-Path" value="${manifest.file.reference.jersey-bundle-1.19.4.jar} lib/${manifest.file.reference.jersey-bundle-1.19.4.jar} ${manifest.file.reference.AwesomeUI.jar} lib/${manifest.file.reference.AwesomeUI.jar} ${manifest.file.reference.jfoenix.jar} lib/${manifest.file.reference.jfoenix.jar} ${manifest.file.reference.jersey-json-1.19.4.jar} lib/${manifest.file.reference.jersey-json-1.19.4.jar} ${manifest.file.reference.jersey-client-1.19.4.jar} lib/${manifest.file.reference.jersey-client-1.19.4.jar} ${manifest.file.reference.jackson-core-asl-1.9.13.jar} lib/${manifest.file.reference.jackson-core-asl-1.9.13.jar} ${manifest.file.reference.jackson-jaxrs-1.9.13.jar} lib/${manifest.file.reference.jackson-jaxrs-1.9.13.jar} ${manifest.file.reference.jackson-mapper-asl-1.9.13.jar} lib/${manifest.file.reference.jackson-mapper-asl-1.9.13.jar} ${manifest.file.reference.jackson-xc-1.9.13.jar} lib/${manifest.file.reference.jackson-xc-1.9.13.jar} ${manifest.file.reference.gson-2.8.2.jar} lib/${manifest.file.reference.gson-2.8.2.jar} "/>
         </manifest>
     </target>
     <target name="-copy-meta-inf">
